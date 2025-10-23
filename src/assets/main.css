@@ -1,0 +1,161 @@
+@import './base.css';
+
+/* 全局基础修正：保证 app 占满视口且没有默认 margin */
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f7fb;
+  /* 页面背景，避免两侧白色空白感 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 主容器居中（与 hero-inner 保持一致）*/
+.main-area,
+.container,
+.cases,
+.hero-inner {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+/* 确保外层不会因为 flex/其它属性收缩 */
+.home-page,
+.main-area {
+  width: 100%;
+  display: block;
+}
+
+/* 响应式容器 */
+.container,
+.main-area,
+.hero-inner,
+.cases {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+/* 全局图片/媒体自适应 */
+img,
+video,
+picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 卡片网格（默认 3 列）*/
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+/* 卡片本身自适应高度，内容撑满 */
+.case-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 控制区响应式布局（搜索 + 筛选）*/
+.controls,
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* 搜索框和选择器在窄屏占满宽度 */
+.controls .search-bar,
+.filters-left {
+  flex: 1 1 420px;
+  min-width: 180px;
+}
+
+/* 小控件固定宽度 */
+.controls .selectors,
+.filters-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 0 1 auto;
+}
+
+/* LoadingSkeleton grid 与 CaseList 保持一致 */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* 响应式断点 */
+@media (max-width: 1000px) {
+
+  .grid,
+  .skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .grid,
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .controls,
+  .filters {
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .controls .selectors,
+  .filters-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .thumb {
+    height: 160px;
+    /* 保持缩略图高度在移动端适中 */
+    object-fit: cover;
+  }
+
+  .hero {
+    padding: 20px 12px;
+  }
+}
+
+/* 可选：微交互/视觉优化 */
+.case-card {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.case-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(20, 20, 40, 0.08);
+}
